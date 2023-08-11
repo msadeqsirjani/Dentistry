@@ -1,52 +1,49 @@
-# Schedular API
-Schedular API is a .NET 7 web API application that provides scheduling functionality to its users. This API allows users to create, view, update, and delete schedules for various tasks. The API also provides authentication and authorization features to ensure that only authorized users can access or modify schedules.
+# Dentistry Web Application
 
-Getting Started
-To get started with this API, you need to set up the development environment first. Follow these steps to set up the development environment:
+Dentistry is a comprehensive web application designed to streamline dental practice management and enhance patient care. The application follows a vertical slice architectural pattern, which promotes modularity and separation of concerns. It allows for independent development and deployment of individual features or slices of functionality.
 
-## Prerequisites
-- .NET 7 SDK
-- Visual Studio 2022 or later
+![Dentistry Architecture](<>)
 
-## Installation
-- Clone the repository to your local machine.
-- Open the solution file SchedularAPI.sln in Visual Studio.
-- Build the solution to restore the NuGet packages.
-- Run the API by pressing F5 or clicking the "Run" button in the toolbar.
+## Architecture Overview
 
-## Usage
-The API provides the following endpoints for scheduling:
+The Dentistry web application is built using a combination of server-side technologies. The server-side is developed using the .NET 7 framework.
 
-##Authentication
-`POST /api/auth/register`: Register a new user.<br/>
-`POST /api/auth/login`: Login an existing user.<br/>
+The application follows the vertical slice architecture, which organizes code by features rather than layers. Each vertical slice represents a self-contained module that incorporates all the necessary components (backend and database) to implement a specific feature or functionality.
 
-## Schedules
-`GET /api/schedules`: Get all schedules.<br/>
-`GET /api/schedules/{id}`: Get a schedule by ID.<br/>
-`POST /api/schedules`: Create a new schedule.<br/>
-`PUT /api/schedules/{id}`: Update an existing schedule by ID.<br/>
-`DELETE /api/schedules/{id}`: Delete a schedule by ID.<br/>
+### Backend
 
-## Security
-The API uses JWT (JSON Web Token) authentication to secure the endpoints. JWT is a widely used standard for securing APIs and web applications. The API generates a JWT token upon successful login, which is then used to authenticate subsequent requests.
+The backend of Dentistry consists of the following components:
 
-The API also provides role-based authorization to ensure that only authorized users can access or modify schedules. The API supports two roles:
-
-* Admin: Has full access to all endpoints.
-* User: Has access to read and modify their own schedules only.
-
-## Testing
-The API includes unit tests to ensure that the functionality of the API works as expected. You can run the unit tests by following these steps:
-
-Open the Test Explorer window in Visual Studio.
-Click the "Run All" button to run all tests.
+- **API Layer**: This layer provides a RESTful API for client applications to interact with the server. It handles incoming requests, performs authentication and authorization, and delegates business logic to the appropriate vertical slice.
+- **Vertical Slices**: Each vertical slice represents a specific feature or functionality of the application, such as appointments, patient records, treatment plans, and billing. Each slice contains its own set of controllers, services, and data access components.
+- **Data Access Layer**: This layer is responsible for interacting with the database and performing CRUD operations. It utilizes an ORM (Object-Relational Mapping) framework, such as Entity Framework Core, to simplify database access and management.
 
 ## Deployment
-The API can be deployed to various cloud providers such as Azure, AWS, or Google Cloud. The API can also be deployed to a self-hosted server using IIS (Internet Information Services) or Kestrel.
+
+Dentistry can be deployed using Docker, which allows for containerized deployment and easy management of the application. The deployment process involves creating a Docker image of the application and running containers based on that image.
+
+To deploy Dentistry using Docker, follow these steps:
+
+1. Install Docker on your deployment server.
+1. Build the Docker image by running the following command in the project's root directory:
+   ````
+   docker build -t dentistry .
+   ```
+   This command builds the Docker image using the provided Dockerfile in the project.
+   ````
+1. Run a Docker container based on the built image:
+   ```
+   docker run -d -p 8080:80 dentistry-app
+   ```
+   This command starts a Docker container based on the image and maps port 8080 on the host to port 80 inside the container.
+1. Access Dentistry by navigating to `http://localhost:8080` in your web browser.
+
+Note: Make sure to configure the necessary environment variables and connection strings for the application to connect to the database and other required services.
 
 ## Contributing
-Contributions are welcome! If you find a bug or would like to add a feature, please create a pull request.
+
+Contributions to Dentistry are welcome! If you have any suggestions, bug reports, or feature requests, please feel free to open an issue or submit a pull request on the project's GitHub repository.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
